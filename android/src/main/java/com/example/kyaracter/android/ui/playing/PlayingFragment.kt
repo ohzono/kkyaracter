@@ -10,22 +10,27 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.domain.playing.DeletePlayingDataUseCase
 import com.example.kyaracter.android.R
 import com.example.kyaracter.android.databinding.PlayingFragmentBinding
-import com.example.infra.db.KyaraDataBase
-import com.example.data.repository.KyaraRepositoryImpl
-import com.example.domain.playing.DeletePlayingDataUseCase
 import com.example.domain.playing.LoadPlayingDataUseCase
-import com.example.infra.db.KyaraDataBaseImpl
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.di
+import org.kodein.di.instance
 
-class PlayingFragment : Fragment() {
+class PlayingFragment : Fragment(), DIAware {
+    override val di: DI by di()
 
     private var _binding: PlayingFragmentBinding? = null
     private val binding get() = _binding!!
     private var mediaPlayer: MediaPlayer? = null
 
+    private val _loadPlayingDtaUseCase: LoadPlayingDataUseCase by instance()
+    private val _deletePlayingDataUseCase: DeletePlayingDataUseCase by instance()
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,18 +44,7 @@ class PlayingFragment : Fragment() {
 
         // todo DI対応後Repository, DB層の依存も消す
         val viewModel =
-            PlayingViewModel(
-                LoadPlayingDataUseCase(
-                    KyaraRepositoryImpl(
-                        KyaraDataBaseImpl()
-                    )
-                ),
-                DeletePlayingDataUseCase(
-                    KyaraRepositoryImpl(
-                        KyaraDataBaseImpl()
-                    )
-                )
-            )
+            PlayingViewModel( _loadPlayingDtaUseCase, _deletePlayingDataUseCase)
 
         binding.kyaraCard.setOnClickListener {
             viewModel.onTap()

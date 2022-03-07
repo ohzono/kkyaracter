@@ -24,8 +24,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":infra:repository"))
-                implementation(project(":model"))
+                api(project(":infra:repository"))
+                api(project(":model"))
+
+                implementation("org.kodein.di:kodein-di:7.1.0")
             }
         }
         val commonTest by getting {

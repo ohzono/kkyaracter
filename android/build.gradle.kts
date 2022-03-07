@@ -31,10 +31,8 @@ dependencies {
     implementation(project(":presentation:uimodel"))
     implementation(project(":domain"))
 
-    // todo DIするまで一時的に依存させる
-    implementation(project(":infra:repository"))
-    implementation(project(":infra:db"))
-    implementation(project(":model"))
+    // DI
+    implementation("org.kodein.di:kodein-di-framework-android-x:7.1.0")
 
     // navigation
     val navVersion = "2.4.1"

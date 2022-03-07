@@ -25,8 +25,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":model"))
-//                implementation("com.russhwolf:multiplatform-settings:0.8.1")
+                api(project(":model"))
                 implementation("com.russhwolf:multiplatform-settings-no-arg:0.8.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
             }

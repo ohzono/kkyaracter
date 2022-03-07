@@ -11,15 +11,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.data.repository.KyaraRepositoryImpl
 import com.example.domain.playing.SavePlayingDataUseCase
-import com.example.infra.db.KyaraDataBaseImpl
 import com.example.kyaracter.android.R
 import com.example.kyaracter.android.databinding.PickingSoundFileFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.di
+import org.kodein.di.instance
 
-class PickingSoundFileFragment : Fragment() {
+class PickingSoundFileFragment : Fragment(), DIAware {
+    override val di: DI by di()
+    private val _savePlayingDataUseCase: SavePlayingDataUseCase by instance()
 
     private var _binding: PickingSoundFileFragmentBinding? = null
     private val binding get() = _binding!!
@@ -47,14 +51,7 @@ class PickingSoundFileFragment : Fragment() {
     ): View {
         _binding = PickingSoundFileFragmentBinding.inflate(inflater)
 
-        // todo DIする
-        viewModel = PickingSoundFileViewModel(
-            SavePlayingDataUseCase(
-                KyaraRepositoryImpl(
-                    KyaraDataBaseImpl()
-                )
-            )
-        )
+        viewModel = PickingSoundFileViewModel(_savePlayingDataUseCase)
         return binding.root
     }
 
