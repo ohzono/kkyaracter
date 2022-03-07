@@ -1,5 +1,6 @@
 package com.example.kyaracter.android.ui.editor
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -33,6 +34,10 @@ class PickingSoundFileFragment : Fragment() {
                 viewModel.onFailedPicking()
                 return@registerForActivityResult
             }
+            requireContext().contentResolver.takePersistableUriPermission(
+                it,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
             viewModel.onSelectedSoundFile(args.character, it.toString())
         }
 
