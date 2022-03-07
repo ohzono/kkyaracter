@@ -15,7 +15,10 @@ import com.example.kyaracter.android.R
 import com.example.kyaracter.android.databinding.PlayingFragmentBinding
 import com.example.domain.playing.LoadPlayingDataUseCase
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.withContext
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.android.x.di
@@ -71,12 +74,14 @@ class PlayingFragment : Fragment(), DIAware {
                         )
                     }
                     mediaPlayer?.apply {
-                        setDataSource(requireContext(), uiState.kyara!!.soundFilePath.toUri())
-                        prepare()
-                        setOnCompletionListener {
-                            viewModel.onPlayingStop()
+                        withContext(Dispatchers.IO) {
+                            setDataSource(requireContext(), uiState.kyara!!.soundFilePath.toUri())
+                            prepare()
+                            setOnCompletionListener {
+                                viewModel.onPlayingStop()
+                            }
+                            start()
                         }
-                        start()
                     }
                 }
 
@@ -98,7 +103,7 @@ class PlayingFragment : Fragment(), DIAware {
         mediaPlayer?.apply {
             reset()
             release()
-            mediaPlayer = null;
+            mediaPlayer = null
         }
         _binding = null
     }

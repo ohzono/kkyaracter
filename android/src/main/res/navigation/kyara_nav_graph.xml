@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/playingFragment"
         android:name="com.example.kyaracter.android.ui.playing.PlayingFragment"
-        android:label="playing_fragment"
+        android:label="@string/play"
         tools:layout="@layout/playing_fragment" >
         <action
             android:id="@+id/action_playingFragment_to_contentEditorFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/contentEditorFragment"
         android:name="com.example.kyaracter.android.ui.editor.ContentEditorFragment"
-        android:label="content_editor_fragment"
+        android:label="@string/fill_in"
         tools:layout="@layout/content_editor_fragment" >
         <action
             android:id="@+id/action_contentEditorFragment_to_pickingSoundFileFragment"
@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/pickingSoundFileFragment"
         android:name="com.example.kyaracter.android.ui.editor.PickingSoundFileFragment"
-        android:label="PickingSoundFileFragment"
+        android:label="@string/select"
         >
         <argument
             android:name="character"

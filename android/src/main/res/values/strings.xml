@@ -1,5 +1,12 @@
 <resources>
-    <string name="loading">loading...</string>
+
+    <!-- screens -->
+    <string name="play">Play!</string>
+    <string name="fill_in">Fill in</string>
+    <string name="select">Select</string>
+    
+    <!-- -->
+    <string name="loading">loading…</string>
     <string name="select_sound_file">Select sound file.</string>
     <string name="input_character_here">Input character here.</string>
     <string name="character">Character</string>
