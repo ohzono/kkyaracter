@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/kyara_nav_graph"
+    app:startDestination="@id/playingFragment">
+
+    <fragment
+        android:id="@+id/playingFragment"
+        android:name="com.example.kyaracter.android.ui.playing.PlayingFragment"
+        android:label="playing_fragment"
+        tools:layout="@layout/playing_fragment" >
+        <action
+            android:id="@+id/action_playingFragment_to_contentEditorFragment"
+            app:destination="@id/contentEditorFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/contentEditorFragment"
+        android:name="com.example.kyaracter.android.ui.editor.ContentEditorFragment"
+        android:label="content_editor_fragment"
+        tools:layout="@layout/content_editor_fragment" >
+        <action
+            android:id="@+id/action_contentEditorFragment_to_pickingSoundFileFragment"
+            app:destination="@id/pickingSoundFileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pickingSoundFileFragment"
+        android:name="com.example.kyaracter.android.ui.editor.PickingSoundFileFragment"
+        android:label="PickingSoundFileFragment"
+        >
+        <argument
+            android:name="character"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_pickingSoundFileFragment_to_playingFragment"
+            app:destination="@id/playingFragment"
+            app:popUpTo="@id/playingFragment"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+
+</navigation>

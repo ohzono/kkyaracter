@@ -1,0 +1,9 @@
+<resources>
+    <string name="loading">loading...</string>
+    <string name="select_sound_file">Select sound file.</string>
+    <string name="input_character_here">Input character here.</string>
+    <string name="character">Character</string>
+
+    <!-- errors -->
+    <string name="error_occurred">Error occurred.</string>
+</resources>
